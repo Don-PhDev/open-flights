@@ -1,10 +1,9 @@
 class Airline < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
-  before_create :slugify
+  before_save :slugify
 
   validates :name, presence: true, uniqueness: true
-  validates :slug, presence: true, uniqueness: true
 
   def slugify
     self.slug = name.parameterize
